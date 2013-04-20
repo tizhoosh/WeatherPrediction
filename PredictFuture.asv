@@ -1,0 +1,49 @@
+% NASA Space Challenge
+% April 19, 2013
+% Toronto, ROM
+% Hamid Tizhoosh
+
+function SunDataFuture = PredictFuture(SunData)
+% This function takes a matrix SunData as input with 10 coluns and some 52
+% rows. Each column represents one year. The values are average weekly
+% irradiance values (W/m^2).
+% The function predicts teh next three years and rturns a matrix with 3
+% columns and 52 rows.
+
+[numWeeks numYears] = size(SunData);
+
+% for i=1:numWeeks
+%     a = SunData(i,:);
+%         thisSTD = (0.1+0.7*rand)*std(a);
+%     if rand<0.5
+%         thisSTD = -1*thisSTD;
+%     end
+%     SunDataFuture(i,1) = thisSTD + (mean(a));
+%     SunDataFuture(i,2) = thisSTD + (mean([a(2:length(a)) SunDataFuture(i,1)]));
+%     SunDataFuture(i,3) = thisSTD + (mean([a(3:length(a)) SunDataFuture(i,2)]));
+% end
+
+h = waitbar(0,'Predicting irradiance for the next 3 years...');
+for i=1:numWeeks
+    a = SunData(i,:);
+    [A,maxError] = estimateFuncParam(a);
+    %isErrorLow = zmf(maxError,[0 1]);
+    
+    SunDataFuture(i,1)  = (1-isErrorLow)*mean(a) + isErrorLow*sum(A.*a(1:length(a)-1));
+    b = [a(2:length(a)) SunDataFuture(i,1)];
+    SunDataFuture(i,2) = (1-isErrorLow)*mean(b) + isErrorLow*sum(A.*b(1:length(b)-1));
+    b = [a(3:length(a)) SunDataFuture(i,1) SunDataFuture(i,2)];
+    SunDataFuture(i,3) = (1-isErrorLow)*mean(b) + isErrorLow* sum(A.*b(1:length(b)-1));
+    waitbar(i/100)
+end
+close(h)
+
+% for i=1:numWeeks
+%     a = SunData(i,:);
+%     a(1:length(a)-1), a(length(a)), length(a)-1
+%     p = polyfit(a(1:length(a)-1), a(length(a)), length(a)-1);
+%     SunDataFuture(i,1)  = polyval(p,a(2:length(a)-1)); 
+%     SunDataFuture(i,2)  = polyval(p,[a(3:length(a)) SunDataFuture(i,1)]); 
+%     SunDataFuture(i,3)  = polyval(p,[a(4:length(a)) SunDataFuture(i,1) SunDataFuture(i,2)]); 
+% end
+

@@ -3,7 +3,6 @@
 % Toronto, ROM
 % Hamid Tizhoosh
 clc
-clear all
 
 % generate fake data
 n = 1000;   % number of data samples
@@ -28,8 +27,8 @@ for j=1:10
         else
             delta = (0.01+0.1*rand)*MaxIrradiance;
         end
-        SunData(i,j) = max(0,floor(SunData(i,j) + delta));
+        SunData(i,j) = floor(SunData(i,j) + delta);
     end
 end
 
-  imagesc(SunData)
+  plot(SunData)

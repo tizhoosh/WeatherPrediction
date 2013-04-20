@@ -2,14 +2,14 @@
 % April 19, 2013
 % Toronto, ROM
 % Hamid Tizhoosh
-clc
-clear all
+
+function SunData = getSunData(numYears)
 
 % generate fake data
 n = 1000;   % number of data samples
 MyData = [];
 
-RegionType = 1;
+RegionType = 2;
 
 if RegionType==1
     MinIrradiance = 10;
@@ -19,9 +19,13 @@ else
     MaxIrradiance = 740;
 end
 % generate data
-for j=1:10
+for j=1:numYears
     for i=1:52
-        midYear = trimf(i,[1 26 52]);
+        if RegionType==1
+            midYear = trimf(i,[5 26 47]);
+        else
+            midYear = trapmf(i,[1 20 32 52]);
+        end
         SunData(i,j) = floor(MinIrradiance+(MaxIrradiance-MinIrradiance)*midYear);
         if rand<0.5
             delta = -1*(0.01+0.1*rand)*MaxIrradiance;
@@ -31,5 +35,3 @@ for j=1:10
         SunData(i,j) = max(0,floor(SunData(i,j) + delta));
     end
 end
-
-  imagesc(SunData)
