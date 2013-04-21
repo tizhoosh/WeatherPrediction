@@ -1,7 +1,7 @@
 % NASA Space Challenge
 % April 19, 2013
 % Toronto, ROM
-% Hamid Tizhoosh
+% Hamid Tizhoosh, Univesity of Waterloo
 
 function [A,maxError] = estimateFuncParam(Values)
 % This function estimates the parameters of a function that reperesents the
@@ -12,7 +12,7 @@ function [A,maxError] = estimateFuncParam(Values)
 
 % Global setting
 maxError = 1e9; % initial error
-maxIter = 5000; % maximum number of iteartions, the more the higher the accuracy
+maxIter = 500; % maximum number of iteartions, the more the higher the accuracy
 errorTolerance = 0.1; % accepatble error rate
 numIter = 0; % initialize number of iteartions
 

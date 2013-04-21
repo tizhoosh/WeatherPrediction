@@ -4,15 +4,12 @@
 % Hamid Tizhoosh, Univesity of Waterloo
 
 function SunData = getSunData(numYears)
-% This function generates fake dat to simalte weekly iradiance for certain
-% regions
-
+% This function generates fake dat to simalte weekly iradia
+% generate fake data
 n = 1000;   % number of data samples
-MyData = []; % initialize the data
-numWeeks = 52;
+MyData = [];
 
-% consider only two regions
-RegionType = 2;
+RegionType = 1;
 
 if RegionType==1
     MinIrradiance = 10;
@@ -21,14 +18,13 @@ else
      MinIrradiance = 50;
     MaxIrradiance = 740;
 end
-
 % generate data
 for j=1:numYears
-    for i=1:numWeeks
+    for i=1:52
         if RegionType==1
-            midYear = trimf(i,[5 numWeeks/2 numWeeks-5]);
+            midYear = trimf(i,[5 26 47]);
         else
-            midYear = trapmf(i,[1 numWeeks/2-3  numWeeks/2+3 numWeeks]);
+            midYear = trapmf(i,[1 20 32 52]);
         end
         SunData(i,j) = floor(MinIrradiance+(MaxIrradiance-MinIrradiance)*midYear);
         if rand<0.5

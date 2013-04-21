@@ -1,10 +1,10 @@
 % NASA Space Challenge
 % April 19, 2013
 % Toronto, ROM
-% Hamid Tizhoosh
+% Hamid Tizhoosh, Univesity of Waterloo
 
 function SunDataFuture = PredictFuture(SunData)
-% This function takes a matrix SunData as input with 10 coluns and some 52
+% This function takes a matrix SunData as input with 10 columns and some 52
 % rows. Each column represents one year. The values are average weekly
 % irradiance values (W/m^2).
 % The function predicts teh next three years and rturns a matrix with 3

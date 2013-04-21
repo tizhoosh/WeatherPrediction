@@ -1,3 +1,8 @@
+% NASA Space Challenge
+% April 19, 2013
+% Toronto, ROM
+% Hamid Tizhoosh, Univesity of Waterloo
+
 function varargout = IrradiancePrediction(varargin)
 % IRRADIANCEPREDICTION M-file for IrradiancePrediction.fig
 %      IRRADIANCEPREDICTION, by itself, creates a new IRRADIANCEPREDICTION or raises the existing
